@@ -15,28 +15,20 @@ namespace Lifesuit
 
             double basePercent = 0.3;
             double stackPercent = 0.03;
+            double succesPrecent = 0;
 
             int startingFailstacks = 0;
             int failstacks = startingFailstacks;
             int maxFailstack = 0;
 
-            int baseItemCost = 0;
-            int baseItemsUsed = 0;
-
-            int plusoneItemCost = 0;
-            int plusoneCreated = 0;
-
             int succesCount = 0;
             int failCount = 0;
 
-            for (int x = 0; x <= 15; x++)
+            for (int x = 0; x <= 20; x++)
             {
                 startingFailstacks = x;
                 failstacks = startingFailstacks;
                 maxFailstack = 0;
-
-                baseItemsUsed = 0;
-                plusoneCreated = 0;
 
                 succesCount = 0;
                 failstacks = 0;
@@ -44,13 +36,17 @@ namespace Lifesuit
 
                 for (int i = 0; i < totalCrafts; i++)
                 {
-                    baseItemsUsed += 2;
+                    succesPrecent = basePercent + (stackPercent * failstacks);
+                    if (succesPrecent > 0.7)
+                    {
+                        succesPrecent = 0.7;
+                    }
 
-                    if (RandomGen.NextDouble() < (basePercent + (stackPercent * failstacks)))
+
+                    if (RandomGen.NextDouble() < succesPrecent)
                     {
                         // succes
                         succesCount++;
-                        plusoneCreated++;
                         failstacks = startingFailstacks;
 
                     }
@@ -68,7 +64,10 @@ namespace Lifesuit
                 }
                 //Console.WriteLine("Succes: " + succesCount.ToString() + " failed: " + failCount.ToString() + " persentage: " + string.Format("{0:0.00}", (double)succesCount / totalCrafts * 100) + "%  maxfailstacks: " + maxFailstack.ToString());
 
-                Console.WriteLine("Failstacks: " + startingFailstacks.ToString() + "\tSucces: " + string.Format("{0:0.00}", (double)succesCount / totalCrafts * 100) + "%\tmaxfailstacks: " + maxFailstack.ToString() + "\tBaseItem per +1: " + string.Format("{0:0.00}", (double)baseItemsUsed / plusoneCreated));
+                //Console.WriteLine("Failstacks: " + startingFailstacks.ToString() + "\tSucces: " + string.Format("{0:0.00}", (double)succesCount / totalCrafts * 100) + "%\tmaxfailstacks: " + maxFailstack.ToString() + "\tBaseItem per +1: " + string.Format("{0:0.00}", (double)baseItemsUsed / plusoneCreated));
+
+                Console.WriteLine( startingFailstacks.ToString() + ", " + string.Format("{0:0.00}", (double)succesCount / totalCrafts * 100) + "%, " + string.Format("{0:0.000}", (double)totalCrafts / succesCount));
+
             }
 
             Console.ReadKey();
