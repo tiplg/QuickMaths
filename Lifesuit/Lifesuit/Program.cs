@@ -11,10 +11,10 @@ namespace Lifesuit
         static void Main(string[] args)
         {
             Random RandomGen = new Random();
-            int totalCrafts = 100000000;
+            int totalCrafts = 10000000;
 
-            double basePercent = 0.3;
-            double stackPercent = 0.03;
+            double basePercent = 0.005;
+            double stackPercent = 0.0005;
             double succesPrecent = 0;
 
             int startingFailstacks = 0;
@@ -24,7 +24,7 @@ namespace Lifesuit
             int succesCount = 0;
             int failCount = 0;
 
-            for (int x = 0; x <= 20; x++)
+            for (int x = 0; x <= 100; x++)
             {
                 startingFailstacks = x;
                 failstacks = startingFailstacks;
